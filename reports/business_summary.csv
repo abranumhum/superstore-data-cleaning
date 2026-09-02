@@ -1,4 +1,4 @@
 metric_name,dirty_value,clean_value,absolute_impact,relative_impact_pct
+total_line_items,10254,10194,60.00,0.59
 total_profit,294766.6336,292296.8146,2469.82,0.84
 total_sales,2322250.1913,2326534.3783,-4284.19,-0.18
-total_units_sold,38580,38654,-74.00,-0.19

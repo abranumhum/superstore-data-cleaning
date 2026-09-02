@@ -10,13 +10,7 @@ dirty:
 sql:
 	./scripts/run_pipeline.sh
 
-validate:
-	uv run python scripts/validate_outputs.py
-
-excel:
-	uv run python scripts/build_excel_check.py
-
 test:
 	uv run pytest
 
-.PHONY: db dirty sql validate excel test
+.PHONY: db dirty sql test

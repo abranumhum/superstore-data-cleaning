@@ -1,18 +1,18 @@
-category,sub_category,orders,total_sales,total_profit,profit_margin_pct,avg_discount_pct
-Furniture,Tables,326,208020.18,-17753.21,-8.53,25.8
-Furniture,Bookcases,232,115361.20,-3632.07,-3.15,21.5
-Office Supplies,Supplies,192,46725.50,-1171.39,-2.51,7.6
-Office Supplies,Fasteners,229,8532.25,2428.64,28.46,7.9
-Technology,Machines,117,189925.04,3461.98,1.82,30.4
-Office Supplies,Labels,368,12695.04,5572.78,43.90,7.1
-Office Supplies,Art,821,27659.01,6653.20,24.05,7.5
-Office Supplies,Envelopes,256,16528.36,6988.02,42.28,8.0
-Furniture,Furnishings,1009,95598.12,13891.74,14.53,13.8
-Office Supplies,Appliances,474,108213.19,18329.48,16.94,16.5
-Office Supplies,Storage,856,224644.56,21285.11,9.48,7.5
-Furniture,Chairs,634,335768.25,27223.53,8.11,16.9
-Office Supplies,Binders,1548,207354.89,31426.10,15.16,36.9
-Office Supplies,Paper,1384,79540.54,34511.51,43.39,7.5
-Technology,Accessories,775,167380.32,41936.64,25.05,7.8
-Technology,Phones,903,331842.64,45050.83,13.58,15.3
-Technology,Copiers,70,150745.29,56093.94,37.21,15.7
+category,sub_category,orders,line_items,total_sales,total_profit,profit_margin_pct,avg_discount_pct
+Furniture,Tables,314,326,208020.18,-17753.21,-8.53,25.8
+Furniture,Bookcases,228,232,115361.20,-3632.07,-3.15,21.5
+Office Supplies,Supplies,189,192,46725.50,-1171.39,-2.51,7.6
+Office Supplies,Fasteners,226,229,8532.25,2428.64,28.46,7.9
+Technology,Machines,114,117,189925.04,3461.98,1.82,30.4
+Office Supplies,Labels,348,368,12695.04,5572.78,43.90,7.1
+Office Supplies,Art,756,821,27659.01,6653.20,24.05,7.5
+Office Supplies,Envelopes,251,256,16528.36,6988.02,42.28,8.0
+Furniture,Furnishings,919,1009,95598.12,13891.74,14.53,13.8
+Office Supplies,Appliances,459,474,108213.19,18329.48,16.94,16.5
+Office Supplies,Storage,787,856,224644.56,21285.11,9.48,7.5
+Furniture,Chairs,591,634,335768.25,27223.53,8.11,16.9
+Office Supplies,Binders,1339,1548,207354.89,31426.10,15.16,36.9
+Office Supplies,Paper,1205,1384,79540.54,34511.51,43.39,7.5
+Technology,Accessories,718,775,167380.32,41936.64,25.05,7.8
+Technology,Phones,826,903,331842.64,45050.83,13.58,15.3
+Technology,Copiers,70,70,150745.29,56093.94,37.21,15.7

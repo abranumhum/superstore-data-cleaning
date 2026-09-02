@@ -3,6 +3,10 @@
 A PostgreSQL-first project that cleans a deliberately corrupted version of Tableau's
 **Sample Superstore** data using SQL, then produces business analysis.
 
+**Key data concept:** Sample Superstore is at the **line-item grain** — each row is one
+product in one order, not one order. The analysis distinguishes `orders` (counted with
+`DISTINCT order_id`) from `line_items` (raw row count).
+
 ## What it does
 
 1. **Python** (`make dirty`) — reads the original workbook and creates a dirty CSV with 7
@@ -51,7 +55,7 @@ Each defect type count is saved to `reports/corruption_summary.json`.
 |---|---|
 | `sql/01_load.sql` | Create raw table matching CSV columns |
 | `sql/02_quality_checks.sql` | Detect and count each defect type |
-| `sql/03_cleaning.sql` | Standardize, deduplicate, quarantine, add constraints |
+| `sql/03_cleaning.sql` | Standardize, deduplicate, exclude unparseable rows, add constraints |
 | `sql/04_analysis.sql` | KPIs, regional/category performance, discount impact, monthly trend |
 
 Cleaning uses only standard SQL: `TRIM`, `UPPER`, `INITCAP`, `REPLACE`, `CASE`, `COALESCE`,
@@ -59,7 +63,7 @@ Cleaning uses only standard SQL: `TRIM`, `UPPER`, `INITCAP`, `REPLACE`, `CASE`, 
 
 ## Key results
 
-- **10,194 clean rows** out of 10,254 dirty rows (60 duplicates removed).
+- **10,194 clean line items** (5,111 distinct orders) — 60 duplicate rows removed.
 - **0** data quality issues remain after cleaning (no negative sales, no negative
   quantities, no out-of-range discounts, no duplicates).
 - Dirty data shows different totals: 481 quality issues detected in `reports/dq_summary.csv`.

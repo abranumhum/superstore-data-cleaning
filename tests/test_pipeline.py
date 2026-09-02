@@ -34,7 +34,7 @@ def test_pipeline_produces_clean_rows() -> None:
     env = _psql_env()
     psql = os.environ.get("PSQL_BIN", "psql")
     subprocess.run(["bash", str(ROOT / "scripts/run_pipeline.sh")], cwd=ROOT, env=env, check=True)
-    # 60 duplicates removed from 10254 → 10194 clean rows
+    # 60 duplicates removed from 10254 → 10194 clean line items
     assert _psql(psql, env, "SELECT count(*) FROM analytics.clean_orders") == "10194"
 
 
@@ -76,4 +76,4 @@ def test_kpi_summary_has_reasonable_totals() -> None:
     total_profit = float(parts[1])
     assert 2_000_000 < total_sales < 3_000_000
     assert total_profit > 200_000
-    assert int(parts[2]) == 10194
+    assert int(parts[2]) == 5111  # count(DISTINCT order_id)

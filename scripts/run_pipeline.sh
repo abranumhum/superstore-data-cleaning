@@ -37,7 +37,8 @@ done
 # 5. Print summary
 echo ""
 echo "=== Pipeline complete ==="
-echo "Clean rows:    $( "$PSQL_BIN" -X -t -c "SELECT count(*) FROM analytics.clean_orders" | tr -d ' ' )"
+echo "Clean rows:     $( "$PSQL_BIN" -X -t -c "SELECT count(*) FROM analytics.clean_orders" | tr -d ' ' ) (line items)"
+echo "Clean orders:   $( "$PSQL_BIN" -X -t -c "SELECT count(DISTINCT order_id) FROM analytics.clean_orders" | tr -d ' ' )"
 echo "DQ found:      $( "$PSQL_BIN" -X -t -c "SELECT sum(issue_count) FROM analytics.dq_summary" | tr -d ' ' )"
 echo "Dirty sales:   $( "$PSQL_BIN" -X -t -c "SELECT round(sum(replace(replace(\"Sales\", '\$', ''), ',', '')::numeric), 2) FROM raw.orders WHERE \"Sales\" IS NOT NULL" | tr -d ' ' )"
 echo "Clean sales:   $( "$PSQL_BIN" -X -t -c "SELECT round(sum(sales), 2) FROM analytics.clean_orders" | tr -d ' ' )"

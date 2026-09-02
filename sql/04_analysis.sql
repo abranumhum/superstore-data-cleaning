@@ -1,16 +1,18 @@
 -- 04_analysis.sql
 -- Business metrics and dirty-vs-clean reconciliation.
+-- Note: Superstore is at the line-item grain — multiple rows per order_id.
+-- We count orders with count(DISTINCT order_id) and line items with count(*).
 BEGIN;
 
--- 1. KPI summary table
+-- 1. KPI summary (order-level metrics)
 CREATE TABLE analytics.kpi_summary AS
 SELECT
-    count(*)::integer AS total_orders,
+    count(DISTINCT order_id)::integer AS total_orders,
     count(DISTINCT customer_id)::integer AS unique_customers,
     round(sum(sales), 2) AS total_sales,
     round(sum(profit), 2) AS total_profit,
     round(100 * sum(profit) / nullif(sum(sales), 0), 2) AS profit_margin_pct,
-    round(avg(sales), 2) AS average_order_value,
+    round(sum(sales) / count(DISTINCT order_id), 2) AS average_order_value,
     sum(quantity)::integer AS total_units_sold,
     round(avg(ship_date - order_date), 1) AS avg_fulfillment_days
 FROM analytics.clean_orders;
@@ -19,7 +21,8 @@ FROM analytics.clean_orders;
 CREATE TABLE analytics.sales_by_region AS
 SELECT
     region,
-    count(*)::integer AS orders,
+    count(DISTINCT order_id)::integer AS orders,
+    count(*)::integer AS line_items,
     round(sum(sales), 2) AS total_sales,
     round(sum(profit), 2) AS total_profit,
     round(100 * sum(profit) / nullif(sum(sales), 0), 2) AS profit_margin_pct
@@ -32,7 +35,8 @@ CREATE TABLE analytics.profitability_by_category AS
 SELECT
     category,
     sub_category,
-    count(*)::integer AS orders,
+    count(DISTINCT order_id)::integer AS orders,
+    count(*)::integer AS line_items,
     round(sum(sales), 2) AS total_sales,
     round(sum(profit), 2) AS total_profit,
     round(100 * sum(profit) / nullif(sum(sales), 0), 2) AS profit_margin_pct,
@@ -46,7 +50,8 @@ CREATE TABLE analytics.top_products AS
 SELECT
     product_name,
     sub_category,
-    count(*)::integer AS orders,
+    count(DISTINCT order_id)::integer AS orders,
+    count(*)::integer AS line_items,
     round(sum(sales), 2) AS total_sales,
     round(sum(profit), 2) AS total_profit
 FROM analytics.clean_orders
@@ -75,7 +80,8 @@ ORDER BY min(discount);
 CREATE TABLE analytics.monthly_trend AS
 SELECT
     to_char(order_date, 'YYYY-MM') AS month,
-    count(*)::integer AS orders,
+    count(DISTINCT order_id)::integer AS orders,
+    count(*)::integer AS line_items,
     round(sum(sales), 2) AS total_sales,
     round(sum(profit), 2) AS total_profit
 FROM analytics.clean_orders
@@ -98,11 +104,10 @@ FROM (
     FROM raw.orders
     WHERE replace(replace("Sales", '$', ''), ',', '') ~ '^-?[0-9]+\.?[0-9]*$'
     UNION ALL
-    SELECT 'total_units_sold',
-           sum("Quantity"::numeric),
-           (SELECT sum(quantity) FROM analytics.clean_orders)
+    SELECT 'total_line_items',
+           count(*),
+           (SELECT count(*) FROM analytics.clean_orders)
     FROM raw.orders
-    WHERE "Quantity" ~ '^-?[0-9]+$'
     UNION ALL
     SELECT 'total_profit',
            sum(replace(replace("Profit", '$', ''), ',', '')::numeric(14,4)),

@@ -1,6 +1,7 @@
 -- 03_cleaning.sql
 -- Clean the dirty data using basic SQL expressions.
--- No custom functions — just TRIM, UPPER, REPLACE, CASE, COALESCE, ROW_NUMBER.
+-- No custom functions — just TRIM, UPPER, REPLACE, CASE, ROW_NUMBER, regex.
+-- Rows that fail basic parsing are simply excluded (WHERE clause filters).
 BEGIN;
 
 CREATE TABLE analytics.clean_orders AS

@@ -1,5 +1,5 @@
-region,orders,total_sales,total_profit,profit_margin_pct
-West,3253,739813.62,110798.82,14.98
-East,2986,691828.18,94883.26,13.71
-Central,2335,503170.68,39865.31,7.92
-South,1620,391721.90,46749.43,11.93
+region,orders,line_items,total_sales,total_profit,profit_margin_pct
+West,1635,3253,739813.62,110798.82,14.98
+East,1475,2986,691828.18,94883.26,13.71
+Central,1179,2335,503170.68,39865.31,7.92
+South,822,1620,391721.90,46749.43,11.93
