@@ -1,0 +1,11 @@
+defect_type,issue_count,detected
+currency_formatted_sales,50,50
+duplicate_rows,60,60
+malformed_customer_id,0,0
+malformed_order_id,0,0
+malformed_product_id,0,0
+mixed_date_formats,101,101
+negative_sales,60,60
+null_customer_name,30,30
+null_postal_code,30,30
+whitespace_case_labels,150,150

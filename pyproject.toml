@@ -1,0 +1,17 @@
+[project]
+name = "superstore-data-cleaning"
+version = "1.0.0"
+description = "SQL-based data cleaning and analysis of Tableau Sample Superstore"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas>=2.2,<3",
+    "xlrd>=2.0,<3",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"
+markers = [
+    "integration: requires a reachable PostgreSQL server",
+]

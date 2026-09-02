@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-superstore}
+      POSTGRES_USER: ${POSTGRES_USER:-superstore}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD before starting Compose}
+    ports:
+      - "127.0.0.1:5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-superstore} -d ${POSTGRES_DB:-superstore}"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+    volumes:
+      - superstore_pgdata:/var/lib/postgresql/data
+
+volumes:
+  superstore_pgdata:

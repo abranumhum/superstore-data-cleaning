@@ -1,0 +1,25 @@
+{
+  "seed": 42,
+  "source_rows": 10194,
+  "dirty_rows": 10254,
+  "defect_types": 16,
+  "defect_instances": 700,
+  "defects_by_type": {
+    "negative_sales": 60,
+    "negative_quantity": 45,
+    "negative_discount": 30,
+    "currency_formatted_sales": 50,
+    "null_markers_customer_name": 30,
+    "null_markers_postal_code": 30,
+    "null_markers_state/province": 25,
+    "mixed_order_date_formats": 50,
+    "mixed_ship_date_formats": 50,
+    "whitespace_and_case_ship mode": 50,
+    "whitespace_and_case_category": 50,
+    "whitespace_and_case_region": 50,
+    "malformed_order_id": 40,
+    "malformed_customer_id": 40,
+    "malformed_product_id": 40,
+    "duplicate_rows": 60
+  }
+}
